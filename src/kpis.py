@@ -1,16 +1,30 @@
 import pandas as pd
 
-def kpi_volume(df):
+def kpi_volume_avancado(df):
+    df = df.copy()
+    df["data"] = pd.to_datetime(df["data"], errors="coerce")
+
+    df["periodo"] = df["data"].dt.to_period("M")
+
+    volume_periodo = df.groupby("periodo").size()
+
+    crescimento = volume_periodo.pct_change().fillna(0)
+
+    origem_mais_crescimento = (
+        df.groupby("origem")["data"]
+          .count()
+          .sort_values(ascending=False)
+          .idxmax()
+    )
+
     return {
-        "total_avaliacoes": len(df),
-        "total_por_origem": df["origem"].value_counts(),
-        "total_por_sentimento": df["sentimento_nlp"].value_counts(dropna=True)
+        "volume_periodo": volume_periodo,
+        "crescimento_periodo": crescimento,
+        "origem_top": origem_mais_crescimento
     }
 
-
-def kpi_sentimento(df):
+def kpi_sentimento_avancado(df):
     df = df.copy()
-
     df["data"] = pd.to_datetime(df["data"], errors="coerce")
 
     mapa = {
@@ -20,11 +34,17 @@ def kpi_sentimento(df):
         "negativo": 2,
         "muito negativo": 1
     }
-    df["sent_numerico"] = df["sentimento_nlp"].map(mapa).fillna(3)
+    df["sent_score"] = df["sentimento_nlp"].map(mapa).fillna(3)
+
+    df["periodo"] = df["data"].dt.to_period("M")
+    sentimento_periodo = df.groupby("periodo")["sent_score"].mean()
+
+    crescimento_sentimento = sentimento_periodo.pct_change().fillna(0)
 
     return {
-        "percentual_sentimentos": df["sentimento_nlp"].value_counts(normalize=True) * 100,
-        "sentimento_medio_geral": df["sent_numerico"].mean(),
-        "sentimento_por_origem": df.groupby("origem")["sent_numerico"].mean(),
-        "sentimento_medio_por_periodo": df.groupby(df["data"].dt.to_period("M"))["sent_numerico"].mean()
+        "sentimento_periodo": sentimento_periodo,
+        "crescimento_sentimento": crescimento_sentimento,
+        "sentimento_por_origem": df.groupby("origem")["sent_score"].mean(),
+        "top_positivo": df.sort_values("sent_score", ascending=False).head(5),
+        "top_negativo": df.sort_values("sent_score", ascending=True).head(5)
     }
