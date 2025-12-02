@@ -57,6 +57,15 @@ def load_data():
 df = load_data()
 print(df.columns)
 opcoes_origem = sorted(df["origem"].dropna().unique())
+st.markdown("""
+    <style>
+    div[data-baseweb="tag"] {
+        background-color: #4169E1 !important;
+        color: white !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 #filtro por origem
 filtro = st.multiselect('Escolha as origens que deseja avaliar: ', opcoes_origem, default=opcoes_origem)
 if filtro:
