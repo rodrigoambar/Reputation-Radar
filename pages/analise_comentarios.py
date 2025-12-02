@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 from src.connection_db import get_collection
 from src.data_prep import colecao_para_df, normalizar_df
+from src.kpis import kpi_sentimento_avancado
+
 
 rename_ra = {
     "texto": "comentario",
@@ -34,7 +34,7 @@ rename_maps = {
     "bairro": "bairro",
 }
 
-st.title("📊 Análise de comentários")
+st.title(" Análise de comentários")
 
 # -------------------------
 # CARREGAMENTO
@@ -62,3 +62,40 @@ filtro = st.multiselect('Escolha as origens que deseja avaliar: ', opcoes_origem
 if filtro:
      df = df[df["origem"].isin(filtro)]
 
+df_com_data = df[df["data"].notna()].copy()
+texto_col = "comentario"
+    # KPIs avançados
+kpis = kpi_sentimento_avancado(df_com_data)
+
+    # ---- Big Numbers ----
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Sentimento Médio Geral", f"{kpis['sentimento_periodo'].mean():.2f}")
+
+with col2:
+    crescimento = kpis['crescimento_sentimento'].iloc[-1]
+    st.metric("Crescimento do Sentimento", f"{crescimento*100:.1f}%", 
+    delta=f"{crescimento*100:.1f}%")
+
+with col3:
+    melhor_origem = kpis["sentimento_por_origem"].idxmax()
+    st.metric("Origem com Melhor Sentimento", melhor_origem)
+
+    # fazer gráficos
+    # ranking de palavras
+    # juntar todo o texto limpo
+
+top_positivo = kpis["top_positivo"]
+top_negativo = kpis["top_negativo"]
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("🌟 Top 10 Comentários Positivos")
+    for _, row in top_positivo.iterrows():
+        st.success(f" 😁 nota: {row['sent_score']} — {row['comentario']}")
+
+with col2:
+    st.subheader("⚠️ Top 10 Comentários Negativos")
+    for _, row in top_negativo.iterrows():
+        st.error(f" 😞 nota: {row['sent_score']} — {row['comentario']}")

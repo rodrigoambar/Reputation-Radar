@@ -64,7 +64,7 @@ with col1:
             background-color: #708090;
             border: 1px solid #ddd;
         ">
-            <h2>📈 Aba Geral</h2>
+            <h2> Aba Geral</h2>
             <p style="color:#F5FFFA;">
                 Visão consolidada da reputação da marca:
                 <br> • KPIs de sentimento
@@ -98,7 +98,7 @@ with col2:
             background-color: #708090;
             border: 1px solid #ddd;
         ">
-            <h2>💬 Análise de Comentários</h2>
+            <h2> Análise de Comentários</h2>
             <p style="color:#F5FFFA;">
                 Explore profundamente o conteúdo textual:
                 <br> • Nuvem de palavras

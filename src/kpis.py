@@ -46,7 +46,7 @@ def kpi_sentimento_avancado(df):
         "sentimento_periodo": sentimento_periodo,
         "crescimento_sentimento": crescimento_sentimento,
         "sentimento_por_origem": df.groupby("origem")["sent_score"].mean(),
-        "top_positivo": df.sort_values("sent_score", ascending=False).head(5),
-        "top_negativo": df.sort_values("sent_score", ascending=True).head(5)
+        "top_positivo": df.sort_values("sent_score", ascending=False).head(10),
+        "top_negativo": df.sort_values("sent_score", ascending=True).head(10)
     }
 

@@ -34,7 +34,7 @@ rename_maps = {
     "bairro": "bairro",
 }
 
-st.title("📊 Visão Geral – Volume de Comentários")
+st.title(" Visão Geral – Volume de Comentários")
 
 # -------------------------
 # CARREGAMENTO
