@@ -25,6 +25,7 @@ def kpi_volume_avancado(df):
 
 def kpi_sentimento_avancado(df):
     df = df.copy()
+
     df["data"] = pd.to_datetime(df["data"], errors="coerce")
 
     mapa = {
@@ -48,3 +49,4 @@ def kpi_sentimento_avancado(df):
         "top_positivo": df.sort_values("sent_score", ascending=False).head(5),
         "top_negativo": df.sort_values("sent_score", ascending=True).head(5)
     }
+

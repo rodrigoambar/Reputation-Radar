@@ -28,14 +28,6 @@ def normalizar_df(df, origem, rename_map):
 
     return df[colunas_finais]
 
-def separar_por_data(df):
-    df = df.copy()
 
-    df["data"] = pd.to_datetime(df["data"], errors="coerce")
-
-    df_com_data = df[df["data"].notna()].copy()
-    df_sem_data = df[df["data"].isna()].copy()
-
-    return df_com_data, df_sem_data
 
 

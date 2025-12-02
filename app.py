@@ -71,7 +71,7 @@ with col1:
                 <br> • Evolução temporal
                 <br> • Distribuição por origem
             </p>
-            <a href="/Aba_Geral" target="_self">
+            <a href="/analise_geral" target="_self">
                 <button style="
                     background-color:#4CAF50;
                     padding:10px 20px;
@@ -105,7 +105,7 @@ with col2:
                 <br> • Ranking de termos
                 <br> • Busca por palavras-chave
             </p>
-            <a href="/Analise_Comentarios" target="_self">
+            <a href="/analise_comentarios" target="_self">
                 <button style="
                     background-color:#4CAF50;
                     padding:10px 20px;
