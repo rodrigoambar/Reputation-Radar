@@ -17,7 +17,7 @@ def imagem_base64(path):
     return base64.b64encode(buffer.getvalue()).decode()
 
 # ----------- TÍTULO DA HOME -----------
-logo = imagem_base64(r"assests\rep_logo.png")
+logo = imagem_base64("assests/rep_logo.png")
 st.markdown(
     f"""
     <div style='text-align:center; padding: 10px;'>
