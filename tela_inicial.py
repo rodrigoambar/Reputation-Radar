@@ -25,7 +25,7 @@ st.markdown(
              style='width:120px; margin-bottom:10px;' />
         <h1 style='margin-bottom:0;'>Reputation Radar</h1>
         <h3 style='color:#666; margin-top:5px;'>
-            Sua reputação monitorada em tempo real. Feedbacks transformados em vantagem competitiva.
+            Sua reputação é monitorada diariamente. E seus feedbacks transformados em vantagem competitiva..
         </h3>
     </div>
     """,
@@ -67,7 +67,7 @@ with col1:
             <h2> Aba Geral</h2>
             <p style="color:#F5FFFA;">
                 Visão consolidada da reputação da marca:
-                <br> • KPIs de sentimento
+                <br> • KPIs de Volume
                 <br> • Evolução temporal
                 <br> • Distribuição por origem
             </p>
@@ -101,9 +101,8 @@ with col2:
             <h2> Análise de Comentários</h2>
             <p style="color:#F5FFFA;">
                 Explore profundamente o conteúdo textual:
-                <br> • Nuvem de palavras
-                <br> • Ranking de termos
-                <br> • Busca por palavras-chave
+                <br> • Ranking de comentários
+                <br> • KPIs de Sentimento
             </p>
             <a href="/analise_comentarios" target="_self">
                 <button style="
